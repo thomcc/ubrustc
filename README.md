@@ -31,7 +31,7 @@ Then, you can either do `./build.sh` to build the binary, which will place it so
 
 Once it's installed, you use it by setting the `RUSTC` environment variable to `ubrustc` when running cargo.
 
-Please don't use this in production.
+Please don't use this in production. I will not be maintaining it.
 
 ## Acknowledgements
 
