@@ -29,6 +29,8 @@ You will need to be on a nightly rust (the toolchain from 2023-02-09 is known to
 
 Then, you can either do `./build.sh` to build the binary, which will place it somewhere inside `target/*`, or `./build.sh install`. If you're on Windows, IDK (it shouldn't be hard to install, but you likely need to set the rpath right).
 
+Once it's installed, you use it by setting the `RUSTC` environment variable to `ubrustc` when running cargo.
+
 Please don't use this in production.
 
 ## Acknowledgements
