@@ -1,0 +1,10 @@
+[package]
+name = "ubrustc"
+description = "UnBorrowed Rust Compiler"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+
+[package.metadata.rust-analyzer]
+rustc_private = true
