@@ -6,7 +6,6 @@ extern crate rustc_interface;
 extern crate rustc_middle;
 extern crate rustc_session;
 
-use rustc_driver::Callbacks;
 use rustc_hir::def_id::LocalDefId;
 use rustc_interface::interface;
 use rustc_middle::mir::BorrowCheckResult;
@@ -42,14 +41,8 @@ fn main() {
     let handler = EarlyErrorHandler::new(ErrorOutputType::HumanReadable(HumanReadableErrorType::Default(ColorConfig::Auto)));
     rustc_driver::init_rustc_env_logger(&handler);
     std::process::exit(rustc_driver::catch_with_exit_code(move || {
-        let args: Vec<String> = std::env::args().collect();
-        run_compiler(args, &mut UbrustcCallbacks);
+        let mut args: Vec<String> = std::env::args().collect();
+        args.splice(1..1, std::iter::once("--cfg=ubrustc".to_string()));
+        rustc_driver::RunCompiler::new(&args, &mut UbrustcCallbacks).run()
     }))
-}
-
-fn run_compiler<CB: Callbacks + Send>(mut args: Vec<String>, callbacks: &mut CB) -> ! {
-    args.splice(1..1, std::iter::once("--cfg=ubrustc".to_string()));
-    std::process::exit(rustc_driver::catch_with_exit_code(move || {
-        rustc_driver::RunCompiler::new(&args, callbacks).run()
-    }));
 }
